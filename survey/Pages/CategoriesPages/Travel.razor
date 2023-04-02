@@ -1,0 +1,70 @@
+﻿@page "/travel"
+
+@if (saved)
+{
+    <div class="alert alert-success" role="alert">
+        Your answers have been saved!
+    </div>
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th>Yes</th>
+            <th>No</th>
+            <th>No Response</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var question in questions)
+        {
+            <tr>
+                <td>@question.Text</td>
+                <td><input type="radio" name="@question.Text" value="yes" @onchange="() => SelectOption(question, true)" /></td>
+                <td><input type="radio" name="@question.Text" value="no" @onchange="() => SelectOption(question, false)" /></td>
+                <td><input type="radio" name="@question.Text" value="noresponse" @onchange="() => SelectOption(question, null)" /></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+    <button class="btn btn-success" @onclick="Save">Save</button>
+    <button class="btn btn-success" @onclick="Save">Generate Questions</button>
+</div>
+
+@code {
+    private bool saved;
+    private List<Question> questions = new List<Question>
+    {
+        new Question { Text = "Have you ever traveled solo?" },
+        new Question { Text = "Do you enjoy going on road trips?" },
+        new Question { Text = "Have you ever been to a different continent?" },
+        new Question { Text = "Do you like staying in hostels when traveling?" },
+        new Question { Text = "Have you ever taken a cruise?" },
+    };
+    private Dictionary<Question, bool?> answers;
+
+    public Travel()
+    {
+        // Initialize the dictionary with all questions and values set to null
+        answers = questions.ToDictionary(q => q, q => (bool?)null);
+    }
+
+    private class Question
+    {
+        public string Text { get; set; }
+    }
+
+    private void SelectOption(Question question, bool? option)
+    {
+        answers[question] = option;
+    }
+
+    private void Save()
+    {
+        // Save the answers
+        saved = true;
+    }
+}

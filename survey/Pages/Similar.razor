@@ -1,0 +1,108 @@
+﻿@page "/similars"
+
+@if (saved)
+{
+    <div class="alert alert-success" role="alert">
+        Your choices have been submitted!
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Similar</th>
+            <th>Other</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Users.OrderByDescending(u => u.Match))
+        {
+            <tr>
+                <td>@user.Username</td>
+                <td>@user.Match%</td>
+                <td><input type="checkbox" @bind="@user.IsRevealed" /></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+    <button class="btn btn-success" @onclick="Submit">Submit</button>
+</div>
+
+@code {
+    private bool saved;
+    public List<User> Users { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Users = new List<User>();
+        for (int i = 0; i < 10; i++)
+        {
+            Users.Add(new User());
+        }
+    }
+
+
+    private void Submit()
+    {
+        // Save the answers
+        saved = true;
+    }
+
+    public class User
+    {
+        public string Username { get; set; }
+        public int Match { get; set; }
+        public bool IsRevealed { get; set; }
+
+
+
+        public User()
+        {
+            Username = GenerateRandomUsername();
+            Match = GenerateRandomMatchPercentage();
+            IsRevealed = false;
+        }
+
+        private string GenerateRandomUsername()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, 6)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        private int GenerateRandomMatchPercentage()
+        {
+            var random = new Random();
+            return random.Next(70, 101);
+        }
+    }
+}
+
+<style>
+    .table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        .table td, .table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            background-color: #4CAF50;
+            color: white;
+        }
+</style>

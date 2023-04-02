@@ -1,0 +1,88 @@
+﻿@page "/categories"
+<h3>Interests Descriptions for Area 1 as tiles</h3>
+@if (saved)
+{
+    <div class="alert alert-success" role="alert">
+        Your answers have been submitted!
+    </div>
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6">
+            <a href="/food">
+                <div class="tile food">
+                    <h2>Food</h2>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-6">
+            <a href="/travel">
+                <div class="tile travel">
+                    <h2>Travel</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <a href="/p4">
+                <div class="tile">
+                    <h2>Entertainment</h2>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-6">
+            <a href="/p5">
+                <div class="tile">
+                    <h2>Sports</h2>
+                </div>
+            </a>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <a href="/p6">
+                <div class="tile">
+                    <h2>Art and Culture</h2>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-6">
+            <a href="/food">
+                <div class="tile">
+                    <h2>Business and Finance</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<style>
+    .tile {
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .food {
+        background-color: #90EE90;
+    }
+
+    .travel {
+        background-color: yellow;
+    }
+
+    .tile:hover {
+        background-color: #ddd;
+    }
+</style>
+
+
+@code {
+    private bool saved;
+
+}

@@ -1,0 +1,53 @@
+﻿@page "/only"
+
+<h3>CRUD operations for Areas, Interests, Questions</h3>
+<h5>If Area is used in an Interest it cannot be deleted</h5>
+<h5>If Interest is used in a Question it cannot be deleted</h5>
+<h5>If Question is used in a Response it cannot be deleted</h5>
+
+<br />
+<br />
+<br />
+<br />
+<h3>Questions</h3>
+<body>
+	<form action="#" method="get">
+		<label for="area">Area:</label>
+		<select id="area" name="area">
+			<option value="">-- Select an Area --</option>
+			<option value="area1">Categories</option>
+			<option value="area2">Topics</option>
+		</select>
+		<label for="area">Interest:</label>
+		<select id="area" name="area">
+			<option value=""></option>
+			<option value="area1">Food</option>
+			<option value="area2">Travel</option>
+			<option value="area2">Trump</option>
+		</select>
+
+		<label for="area">Results per page:</label>
+		<select id="area" name="area">
+			<option value="25">25</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+		</select>
+		<br />	<br />
+		<button type="submit">Search</button>
+	</form>
+</body>
+<br />
+<br />
+<!--
+	<form action="upload.php" method="post" enctype="multipart/form-data">
+		<label for="file">CSV file with questions:</label>
+		<input type="file" id="file" name="file">
+		<button type="submit" name="submit">Upload</button>
+	</form>
+-->
+
+
+
+@code {
+
+}

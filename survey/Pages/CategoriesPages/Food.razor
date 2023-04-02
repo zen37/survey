@@ -1,0 +1,78 @@
+﻿@page "/food"
+@if (saved)
+{
+    <div class="alert alert-success" role="alert">
+        Your answers have been saved!
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th>Yes</th>
+            <th>No</th>
+            <th>No Response</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var question in questions)
+        {
+            <tr>
+                <td>@question.Text</td>
+                <td><input type="radio" id="@($"{question.Text}-yes")" name="@question.Text" value="yes" @onclick="() => SelectOption(question, true)"></td>
+                <td><input type="radio" id="@($"{question.Text}-no")" name="@question.Text" value="no" @onclick="() => SelectOption(question, false)"></td>
+                <td><input type="radio" id="@($"{question.Text}-not-responded")" name="@question.Text" value="not-responded" checked></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="text-center">
+    <button class="btn btn-success" @onclick="Save">Save</button>
+    <button class="btn btn-success" @onclick="GenerateQuestions">Generate Questions</button>
+</div>
+
+@code {
+    private bool saved;
+
+    private List<Question> questions = new List<Question>
+    {
+        new Question { Text = "Have you ever eaten sushi?" },
+        new Question { Text = "Do you like spicy food?" },
+        new Question { Text = "Have you ever tried caviar?" },
+        new Question { Text = "Do you enjoy eating chocolate?" },
+        new Question { Text = "Do you like coffee?" },
+        /*
+        new Question { Text = "Have you ever eaten insects?" },
+        new Question { Text = "Do you prefer sweet or savory snacks?" },
+        new Question { Text = "Have you ever tried raw oysters?" },
+        new Question { Text = "Have you ever had a food allergy?" },
+        new Question { Text = "Do you enjoy cooking?" }
+        */
+    };
+
+    private Dictionary<Question, string> answers = new Dictionary<Question, string>();
+
+    private void SelectOption(Question question, bool option)
+    {
+        answers[question] = option ? "yes" : "no";
+    }
+
+    private class Question
+    {
+        public string Text { get; set; }
+    }
+
+    private void Save()
+    {
+        // Save the answers
+        saved = true;
+    }
+
+    private void GenerateQuestions()
+    {
+        // Save the answers
+        saved = true;
+    }
+}
+

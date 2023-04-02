@@ -1,0 +1,68 @@
+﻿@page "/submit"
+@if (saved)
+{
+    <div class="alert alert-success" role="alert">
+        Your answers have been submitted!
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th>Yes</th>
+            <th>No</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var question in questions)
+        {
+            <tr>
+                <td>@question.Text</td>
+                <td><input type="radio" id="@($"{question.Text}-yes")" name="@question.Text" value="yes" @onclick="() => SelectOption(question, true)"></td>
+                <td><input type="radio" id="@($"{question.Text}-no")" name="@question.Text" value="no" @onclick="() => SelectOption(question, false)"></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="text-center">
+    <button class="btn btn-success" @onclick="Save">Submit</button>
+</div>
+
+@code {
+    private bool saved;
+
+    private List<Question> questions = new List<Question>
+    {
+        new Question { Text = "Have you ever eaten sushi?" },
+        new Question { Text = "Do you like spicy food?" },
+        new Question { Text = "Have you ever tried caviar?" },
+        new Question { Text = "Do you enjoy eating chocolate?" },
+        new Question { Text = "Do you like coffee?" },
+        new Question { Text = "Have you ever traveled solo?" },
+        new Question { Text = "Do you enjoy going on road trips?" },
+        new Question { Text = "Have you ever been to a different continent?" },
+        new Question { Text = "Do you like staying in hostels when traveling?" },
+        new Question { Text = "Have you ever taken a cruise?" },
+    };
+
+    private Dictionary<Question, string> answers = new Dictionary<Question, string>();
+
+    private void SelectOption(Question question, bool option)
+    {
+        answers[question] = option ? "yes" : "no";
+    }
+
+    private class Question
+    {
+        public string Text { get; set; }
+    }
+
+    private void Save()
+    {
+        // Save the answers
+        saved = true;
+    }
+
+}
+
