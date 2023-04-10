@@ -11,8 +11,9 @@
     <thead>
         <tr>
             <th>User</th>
-            <th>Similar</th>
-            <th>Other</th>
+            <th>Score</th>
+            <th>Request</th>
+            <th>Show</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +23,7 @@
                 <td>@user.Username</td>
                 <td>@user.Match%</td>
                 <td><input type="checkbox" @bind="@user.IsRevealed" /></td>
+                <td></td>
             </tr>
         }
     </tbody>
