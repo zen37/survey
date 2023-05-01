@@ -1,4 +1,4 @@
-﻿@page "/similars"
+﻿@page "/matches"
 
 @if (saved)
 {
@@ -12,25 +12,29 @@
         <tr>
             <th>User</th>
             <th>Score</th>
-            <th>Request</th>
-          <!--  <th>Show</th> -->
+            <th>LinkedIn</th>
+            <th>Facebook</th>
+            <th>Instagram</th>
+            <th>Other</th>
+            <th>Date Request Accepted</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var user in Users.OrderByDescending(u => u.Match))
+        @foreach (var user in Users.OrderByDescending(u => u.RequestAccept))
         {
             <tr>
                 <td>@user.Username</td>
-                <td>@user.Match%</td>
-                <td><input type="checkbox" @bind="@user.IsRevealed" /></td>
+                <td>@user.LinkedIn</td>
+                <td>@user.LinkedIn</td>
+                <td>@user.LinkedIn</td>
+                <td>@user.LinkedIn</td>
+                <td>@user.LinkedIn</td>
+                    <td></td>
             </tr>
         }
     </tbody>
 </table>
 
-<div class="text-center">
-    <button class="btn btn-success" @onclick="Submit">Submit</button>
-</div>
 
 @code {
     private bool saved;
@@ -56,16 +60,14 @@
     public class User
     {
         public string Username { get; set; }
-        public int Match { get; set; }
-        public bool IsRevealed { get; set; }
+        public string LinkedIn { get; set; }
+        public DateOnly RequestAccept { get; set; }
 
 
 
         public User()
         {
             Username = GenerateRandomUsername();
-            Match = GenerateRandomMatchPercentage();
-            IsRevealed = false;
         }
 
         private string GenerateRandomUsername()
